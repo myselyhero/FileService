@@ -11,7 +11,7 @@
     <groupId>com.yongyongwang.file</groupId>
     <artifactId>manager</artifactId>
     <version>1.0</version>
-    <name>manager</name>
+    <name>File-Server</name>
     <description>文件管理服务器</description>
     <properties>
         <java.version>1.8</java.version>

@@ -34,7 +34,6 @@ public class FileUtils {
             case "quicktime":
             case "x-msvideo":
             case "x-matroska":
-            case "mpeg":
             case "webm":
             case "mp2ts":
             case "flv":
@@ -52,11 +51,31 @@ public class FileUtils {
      */
     public static boolean isVoice(String path){
         switch (path){
-            case "mp3":
             case "m4a":
             case "M4A":
             case "aac":
             case "flac":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     *
+     * @param path
+     * @return
+     */
+    public static boolean isMusic(String path){
+        switch (path){
+            case "mp3":
+            case "MP3":
+            case "mpeg":
+            case "MIDI":
+            case "midi":
+            case "WMA":
+            case "wma":
+                return true;
             default:
                 return false;
         }
@@ -119,6 +138,7 @@ public class FileUtils {
      * @return
      */
     public static String getBasePath(String url){
+
         if (url == null || url.length() == 0) {
             return SmileContents.FILE;
         }
@@ -127,6 +147,8 @@ public class FileUtils {
 
         if (isVideo(type)){
             return SmileContents.VIDEO;
+        }else if (isMusic(type)){
+            return SmileContents.MUSIC;
         }else if (isVoice(type)){
             return SmileContents.VOICE;
         }else if (isImage(type)){

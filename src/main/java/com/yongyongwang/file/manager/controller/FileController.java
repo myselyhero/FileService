@@ -31,8 +31,18 @@ import java.util.UUID;
 @RequestMapping("/file")
 public class FileController {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param files
+     * @param folderStr
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     @PostMapping("/uploadFile")
-    public String uploadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file", required = false) MultipartFile[] files)
+    public String uploadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file", required = false) MultipartFile[] files,@RequestParam(value = "folder",required = false)String folderStr)
             throws IllegalStateException, IOException {
         // TODO 进入方法前
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -61,14 +71,20 @@ public class FileController {
                     }
 
                     /** 文件夹不存在则创建 */
-                    String folder = FileUtils.getBasePath(files[i].getOriginalFilename());
+                    String folder;
+                    if (TextUtils.isEmpty(folderStr)){
+                        folder = FileUtils.getBasePath(files[i].getOriginalFilename());
+                    }else {
+                        folder = folderStr;
+
+                    }
                     File packFile = new File(SmileContents.BASE_PATH + folder);
                     if (!packFile.exists()) {
                         packFile.mkdir();
                     }
 
                     /** 输出路径 */
-                    String outName = folder + "/" + UUID.randomUUID().toString().replace("-","") + "_" + files[i].getOriginalFilename();
+                    String outName = folder + "/" + files[i].getOriginalFilename();
                     String outUrl = SmileContents.BASE_PATH + outName;
 
                     /** 写入 */

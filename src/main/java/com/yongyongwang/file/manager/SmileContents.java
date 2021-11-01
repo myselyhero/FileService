@@ -17,6 +17,8 @@ public class SmileContents {
     public static final String VIDEO = "video";
     /** 图片保存路径 */
     public static final String IMAGE = "image";
+    /** 图片保存路径 */
+    public static final String MUSIC = "music";
     /** 语音保存路径 */
     public static final String VOICE = "voice";
     /**  */
